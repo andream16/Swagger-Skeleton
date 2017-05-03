@@ -1,0 +1,184 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Golang Todo List API",
+    "version": "1.0.0",
+    "title": "Golang Todo List",
+    "contact": {
+      "email": "andrea.medda.uni@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/todo": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "gets todo/todos",
+        "operationId": "getTodo",
+        "description": "By passing in the appropriate options, you can get one or many todos\n",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "pass an optional search string for looking up inventory",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todo"
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "adds a todo item",
+        "operationId": "addTodo",
+        "description": "By passing in the appropriate options, you can add a todo to the system\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "todo",
+            "description": "todo item to add",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "todo created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing todo already exists"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "edit a todo item",
+        "operationId": "editTodo",
+        "description": "By passing in the appropriate options, you can edit a todo\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "todo",
+            "description": "todo item to edit",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "todo edited"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "deletes a todo item",
+        "operationId": "deleteTodo",
+        "description": "By passing in the appropriate options, you can delete an existing todo\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "todo",
+            "description": "todo item to delete",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "todo deleted"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "todo does not exist"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "todo": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "aeb5612bm9"
+        },
+        "content": {
+          "type": "string",
+          "example": "Get some Nugs"
+        }
+      }
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/AndreaM16/Go-Todo-List/1.0.0"
+}
